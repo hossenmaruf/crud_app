@@ -1,3 +1,20 @@
+<?php
+
+
+include("function.php");
+
+    $objCrudAdmin = new crudApp();
+
+   if(isset($_POST['add_info']))  {
+
+        $return_msg =   $objCrudAdmin->addData($_POST) ;
+
+   }
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -20,13 +37,15 @@
 
 
         <form class="form" action="" method="POST" enctype="multipart/form-data">
+        
 
+            <?php if(isset($return_msg)) {echo $return_msg ; }   ?>
 
             <input class="form-control mb-2" type="text" name="stu_name" placeholder="Enter Your Name">
             <input class="form-control mb-2" type="number" name="stu_roll" placeholder="Enter Your Roll">
 
 
-            <label for="image"> Upload Youre Image</label>
+            <label for="image"> Upload Your Image</label>
 
             <input class="form-control mb-2" type="file" name="stu_img">
 
