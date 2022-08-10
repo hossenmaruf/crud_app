@@ -15,7 +15,7 @@ class crudApp
         $dbname = 'crud_app';
 
 
-        
+
 
         $this->conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
@@ -34,19 +34,33 @@ class crudApp
         $stu_img = $_FILES['stu_img']['name'];
         $tmp_name = $_FILES['stu_img']['tmp_name'];
 
-        $query = "INSERT INTO students( stu_name , stu_roll , stu_img ) VALUE ('$stu_name' , $stu_roll , '$stu_img')" ;
+        $query = "INSERT INTO students( stu_name , stu_roll , stu_img ) VALUE ('$stu_name' , $stu_roll , '$stu_img')";
 
-        
-//       $db_connection_check =   mysqli_query($this->conn, $query);
-// var_dump($db_connection_check);
+        // mysqli_query($this->conn, $query);
 
 
-        if (mysqli_query($this->conn, $query)) {
 
-            move_uploaded_file($tmp_name, 'upload/'. $stu_img ) ;
+        // $db_connection_check =   mysqli_query($this->conn, $query);
+        //  var_dump($db_connection_check);
+
+
+      if (mysqli_query($this->conn, $query)) {
+
+            move_uploaded_file($tmp_name, 'upload/' . $stu_img);
 
             return "Information added successfully";
-        }
+       }
+    }
+
+
+    public function displayData()
+    {
+
+        $query = "SELECT * FROM students";
+        if (mysqli_query($this->conn, $query)) {
+            $returnData = mysqli_query($this->conn, $query);
+            return $returnData;
+       }
     }
 }
 

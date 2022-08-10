@@ -3,13 +3,15 @@
 
 include("function.php");
 
-    $objCrudAdmin = new crudApp();
+$objCrudAdmin = new crudApp();
 
-   if(isset($_POST['add_info']))  {
+if (isset($_POST['add_info'])) {
 
-        $return_msg =   $objCrudAdmin->addData($_POST) ;
+    $return_msg =   $objCrudAdmin->addData($_POST);
+}
 
-   }
+
+$stu_data =   $objCrudAdmin->displayData();
 
 ?>
 
@@ -37,9 +39,11 @@ include("function.php");
 
 
         <form class="form" action="" method="POST" enctype="multipart/form-data">
-        
 
-            <?php if(isset($return_msg)) {echo $return_msg ; }   ?>
+
+            <?php if (isset($return_msg)) {
+                echo $return_msg;
+            }   ?>
 
             <input class="form-control mb-2" type="text" name="stu_name" placeholder="Enter Your Name">
             <input class="form-control mb-2" type="number" name="stu_roll" placeholder="Enter Your Roll">
@@ -84,26 +88,30 @@ include("function.php");
 
             <tbody>
 
-                <tr>
 
-                    <td> 1 </td>
-                    <td> maruf </td>
-                    <td> 456546 </td>
-                    <td> </td>
-                    <td>
+                <?php while ($stu_datas = mysqli_fetch_assoc($stu_data)) {    ?>
 
-                        <a class="btn btn-success" href="#"> Edit </a>
-                        <a class="btn btn-warning" href="#"> Deleted </a>
+                    <tr>
 
+                        <td> <?php echo $stu_datas['id']; ?> </td>
+                        <td> <?php echo $stu_datas['stu_name']; ?> </td>
+                        <td> <?php echo $stu_datas['stu_roll']; ?> </td>
+                        <td> <img style="height: 50px;"   src="upload/<?php echo $stu_datas['stu_img']    ?> "> </td>
+                        <td>
 
-
-
-
-                    </td>
+                            <a class="btn btn-success" href="#"> Edit </a>
+                            <a class="btn btn-warning" href="#"> Deleted </a>
 
 
-                </tr>
 
+
+
+                        </td>
+
+
+                    </tr>
+
+                <?php } ?>
 
             </tbody>
 
