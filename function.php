@@ -62,6 +62,46 @@ class crudApp
             return $returnData;
        }
     }
+
+    public function displayDataByID($id)
+    {
+
+        $query = "SELECT * FROM students WHERE id = $id  ";
+        if (mysqli_query($this->conn, $query)) {
+            $returnData = mysqli_query($this->conn, $query);
+            $student_data = mysqli_fetch_assoc($returnData) ;
+            return $student_data ;
+
+       }
+    }
+
+   public function update_data($data){
+
+
+         $stu_name =  $data['u_stu_name'] ;
+         $stu_roll = $data['u_stu_roll']  ;
+         $stu_id = $data['stu_id'] ;
+         $stu_img = $_FILES ['u_stu_name'] ['name'] ;
+         $tmp_name = $_FILES['u_stu_name'] ['tmp_name'] ;
+
+
+      
+           $query = "UPDATE  students SET stu_name = '$stu_name' , 
+           stu_roll = '$stu_roll' , stu_img = '$stu_img'  WHERE id =  $stu_id  " ;
+
+
+       if(mysqli_query($this->conn , $query)) {
+
+           move_uploaded_file($tmp_name, 'upload/'.$stu_img  ) ;
+           return "update 100/100" ;
+       }
+
+
+
+
+
+   }
+
 }
 
 ?>

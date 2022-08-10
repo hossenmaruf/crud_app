@@ -96,10 +96,10 @@ $stu_data =   $objCrudAdmin->displayData();
                         <td> <?php echo $stu_datas['id']; ?> </td>
                         <td> <?php echo $stu_datas['stu_name']; ?> </td>
                         <td> <?php echo $stu_datas['stu_roll']; ?> </td>
-                        <td> <img style="height: 50px;"   src="upload/<?php echo $stu_datas['stu_img']    ?> "> </td>
+                        <td> <img style="height: 50px;" src="upload/<?php echo $stu_datas['stu_img']    ?> "> </td>
                         <td>
 
-                            <a class="btn btn-success" href="#"> Edit </a>
+                            <a class="btn btn-success" href="edit.php?status = edit&& id =  <?php echo $stu_datas['id']; ?>   "> Edit </a>
                             <a class="btn btn-warning" href="#"> Deleted </a>
 
 
