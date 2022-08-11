@@ -66,7 +66,14 @@ class crudApp
     public function displayDataByID($id)
     {
 
+
+        
+
         $query = "SELECT * FROM students WHERE id = $id  ";
+
+        var_dump(mysqli_query($this->conn, $query));
+
+
         if (mysqli_query($this->conn, $query)) {
             $returnData = mysqli_query($this->conn, $query);
             $student_data = mysqli_fetch_assoc($returnData) ;
@@ -81,8 +88,11 @@ class crudApp
          $stu_name =  $data['u_stu_name'] ;
          $stu_roll = $data['u_stu_roll']  ;
          $stu_id = $data['stu_id'] ;
-         $stu_img = $_FILES ['u_stu_name'] ['name'] ;
-         $tmp_name = $_FILES['u_stu_name'] ['tmp_name'] ;
+
+         $stu_img = $_FILES ['u_stu_img'] ['name'] ;
+         
+        
+         $tmp_name = $_FILES['u_stu_img'] ['tmp_name'] ;
 
 
       

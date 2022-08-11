@@ -5,19 +5,17 @@ include("function.php");
 
 $objCrudAdmin = new crudApp();
 
-$stu_data =   $objCrudAdmin->displayData();
-
-
 if (isset($_GET['status'])) {
     if ($_GET['status'] = 'edit') {
         $id = $_GET['id'];
+
         $previous_data =  $objCrudAdmin->displayDataByID($id);
     }
 }
 
 if (isset($_POST['edit_btn'])) {
 
-    $msg =    $objCrudAdmin->update_data($_POST);
+    $msg   =    $objCrudAdmin->update_data($_POST);
 }
 
 
@@ -56,8 +54,13 @@ if (isset($_POST['edit_btn'])) {
                 echo $msg;
             }   ?>
 
-            <input class="form-control mb-2" type="text" name="u_stu_name" value=" <?php echo  $previous_data['stu_name'];  ?>">
-            <input class="form-control mb-2" type="number" name="u_stu_roll" value=" <?php echo  $previous_data['stu_roll']; ?>">
+            <!-- nich ei 2line a problem , na hole $previous_data variable a problem or server ei problem -->
+
+
+
+            <input class="form-control mb-2" type="text" name="u_stu_name" value=" <?php echo $previous_data['stu_name']; ?> ">
+            <input class="form-control mb-2" type="number" name="u_stu_roll" value="<?php echo $previous_data['stu_roll']; ?>">
+
 
 
             <label for="image"> Upload Your Image</label>

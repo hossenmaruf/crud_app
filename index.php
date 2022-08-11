@@ -99,7 +99,7 @@ $stu_data =   $objCrudAdmin->displayData();
                         <td> <img style="height: 50px;" src="upload/<?php echo $stu_datas['stu_img']    ?> "> </td>
                         <td>
 
-                            <a class="btn btn-success" href="edit.php?status = edit&& id =  <?php echo $stu_datas['id']; ?>   "> Edit </a>
+                            <a class="btn btn-success" href="edit.php?status=edit&&id=<?php echo $stu_datas['id']; ?>"> Edit </a>
                             <a class="btn btn-warning" href="#"> Deleted </a>
 
 
