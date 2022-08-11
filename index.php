@@ -10,6 +10,13 @@ if (isset($_POST['add_info'])) {
     $return_msg =   $objCrudAdmin->addData($_POST);
 }
 
+if (isset($_GET['status'])) {
+    if ($_GET['status'] = 'delete') {
+        $delete_id = $_GET['id'];
+        $delete_msg  = $objCrudAdmin->delete_data($delete_id);
+    }
+}
+
 
 $stu_data =   $objCrudAdmin->displayData();
 
@@ -36,6 +43,9 @@ $stu_data =   $objCrudAdmin->displayData();
     <div class="containter my-4 p-4 shadow">
 
         <h2> <a style="text-decoration:none ;" href="index.php"> Student DataBase </a> </h2>
+
+     
+         <?php if(isset($delete_msg)) { echo $delete_msg ; }   ?>
 
 
         <form class="form" action="" method="POST" enctype="multipart/form-data">
@@ -100,7 +110,7 @@ $stu_data =   $objCrudAdmin->displayData();
                         <td>
 
                             <a class="btn btn-success" href="edit.php?status=edit&&id=<?php echo $stu_datas['id']; ?>"> Edit </a>
-                            <a class="btn btn-warning" href="#"> Deleted </a>
+                            <a class="btn btn-warning" href="?status=delete&&id=<?php echo $stu_datas['id']; ?>"> Deleted </a>
 
 
 

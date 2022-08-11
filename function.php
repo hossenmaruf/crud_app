@@ -44,12 +44,12 @@ class crudApp
         //  var_dump($db_connection_check);
 
 
-      if (mysqli_query($this->conn, $query)) {
+        if (mysqli_query($this->conn, $query)) {
 
             move_uploaded_file($tmp_name, 'upload/' . $stu_img);
 
             return "Information added successfully";
-       }
+        }
     }
 
 
@@ -60,58 +60,59 @@ class crudApp
         if (mysqli_query($this->conn, $query)) {
             $returnData = mysqli_query($this->conn, $query);
             return $returnData;
-       }
+        }
     }
 
     public function displayDataByID($id)
     {
 
-
-        
-
         $query = "SELECT * FROM students WHERE id = $id  ";
-
-        var_dump(mysqli_query($this->conn, $query));
-
 
         if (mysqli_query($this->conn, $query)) {
             $returnData = mysqli_query($this->conn, $query);
-            $student_data = mysqli_fetch_assoc($returnData) ;
-            return $student_data ;
-
-       }
+            $student_data = mysqli_fetch_assoc($returnData);
+            return $student_data;
+        }
     }
 
-   public function update_data($data){
+    public function delete_data($id)
+    {
 
-
-         $stu_name =  $data['u_stu_name'] ;
-         $stu_roll = $data['u_stu_roll']  ;
-         $stu_id = $data['stu_id'] ;
-
-         $stu_img = $_FILES ['u_stu_img'] ['name'] ;
-         
+        $catch_img  = "SELECT * FROM students WHERE id = $id ";
+        $delete_stu_info = mysqli_query($this->conn, $catch_img);
+        $stu_info_for_delete = mysqli_fetch_assoc($delete_stu_info);
+        $delete_stu_img = $stu_info_for_delete['stu_img'];
+        $query = " DELETE FROM students WHERE id = $id  ";
         
-         $tmp_name = $_FILES['u_stu_img'] ['tmp_name'] ;
+        if (mysqli_query($this->conn, $query)) {
+            unlink('upload/'.$delete_stu_img);
+            return "deleted successfully";
+        }
+    }
+
+    public function update_data($data)
+    {
 
 
-      
-           $query = "UPDATE  students SET stu_name = '$stu_name' , 
-           stu_roll = '$stu_roll' , stu_img = '$stu_img'  WHERE id =  $stu_id  " ;
+        $stu_name =  $data['u_stu_name'];
+        $stu_roll = $data['u_stu_roll'];
+        $stu_id = $data['stu_id'];
+
+        $stu_img = $_FILES['u_stu_img']['name'];
 
 
-       if(mysqli_query($this->conn , $query)) {
+        $tmp_name = $_FILES['u_stu_img']['tmp_name'];
 
-           move_uploaded_file($tmp_name, 'upload/'.$stu_img  ) ;
-           return "update 100/100" ;
-       }
-
+        $query = "UPDATE  students SET stu_name = '$stu_name' , 
+           stu_roll = '$stu_roll' , stu_img = '$stu_img'  WHERE id =  $stu_id  ";
 
 
+        if (mysqli_query($this->conn, $query)) {
 
+            move_uploaded_file($tmp_name, 'upload/' . $stu_img);
+            return "update 100/100";
+        }
+    }
 
-   }
-
+   
 }
-
-?>

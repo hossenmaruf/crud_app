@@ -50,7 +50,7 @@ if (isset($_POST['edit_btn'])) {
         <form class="form" action="" method="POST" enctype="multipart/form-data">
 
 
-            <?php if (isset($return_msg)) {
+            <?php if (isset($msg)) {
                 echo $msg;
             }   ?>
 
